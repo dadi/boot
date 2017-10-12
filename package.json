@@ -1,0 +1,27 @@
+{
+  "name": "dadi-boot",
+  "version": "0.0.0-development",
+  "description": "A module to help DADI apps boot uniformly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dadi/boot.git"
+  },
+  "keywords": [
+    "dadi"
+  ],
+  "author": "David Longworth <mr@longworth.to>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dadi/boot/issues"
+  },
+  "homepage": "https://github.com/dadi/boot#readme",
+  "dependencies": {
+    "cli-table2": "^0.2.0",
+    "colors": "^1.1.2",
+    "ora": "^1.3.0"
+  }
+}
