@@ -8,11 +8,15 @@
 In the file which is triggered by `npm start` e.g., `main.js`
 
 ```js
-const appName = require('./package.json').description
+const pkg = require('./package.json')
 const dadiBoot = require('@dadi/boot')
 
 // Console start message
-dadiBoot.start(appName)
+dadiBoot.start({
+  human: pkg.description,
+  npm: pkg.name,
+  version: pkg.version
+})
 ```
 
 `appName` looks at the `description` field in the `package.json` file, this should be the brand name for the app e.g., `DADI Web`
