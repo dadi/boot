@@ -10,6 +10,7 @@ const docs = 'https://docs.dadi.tech'
 const cliTable = require('cli-table2')
 const colors = require('colors')
 const concierge = require('ora')()
+const dadiStatus = require('@dadi/status')
 
 // Make some tables we can use to pretty print data
 
@@ -39,11 +40,20 @@ const footer = new cliTable({
  * @param {product} product - The name of the app, passed from the app's package.json
  */
 
-let appName // Make this globally available
+// Make these globally available
+let pkg 
+let statusPayload 
 
 module.exports.start = product => {
-  appName = product
-  concierge.start(`Starting ${appName}…`)
+  pkg = product
+  statusPayload = {
+    package: pkg.npm,
+    version: pkg.version,
+    healthCheck: {
+      routes: []
+    }
+  }
+  concierge.start(`Starting ${pkg.human}…`)
   concierge.color = 'white'
 }
 
@@ -57,7 +67,17 @@ module.exports.started = info => {
   Object.keys(info.body).map(i => body.push([i.green, info.body[i]]))
   Object.keys(info.footer).map(i => footer.push([i, info.footer[i]]))
 
-  concierge.succeed(`Started ${appName}\n${`@`.green} ${info.server.underline}
+  // Check if this is latest version
+  dadiStatus(statusPayload, (err, data) => {
+    if (data.service && data.service.versions) {
+      const versions = data.service.versions
+      if (versions.current !== versions.latest) {
+       concierge.info(`A newer version of ${pkg.human} is available: ${versions.latest}`)
+      }
+    }
+  })
+
+  concierge.succeed(`Started ${pkg.human}\n${`@`.green} ${info.server.underline}
   
   ${header.toString().split('\n').join('\n  ')}
   ${body.toString().split('\n').join('\n  ')}
@@ -89,6 +109,6 @@ module.exports.error = err => {
  */
 
 module.exports.stopped = message => {
-  concierge.fail(`Stopping & exiting ${appName}.`.red)
+  concierge.fail(`Stopping & exiting ${pkg.human}.`.red)
   process.exit(0)
 }

@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/dadi/boot#readme",
   "dependencies": {
+    "@dadi/status": "^1.0.3",
     "cli-table2": "^0.2.0",
     "colors": "^1.1.2",
     "ora": "^1.3.0"
