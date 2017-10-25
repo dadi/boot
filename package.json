@@ -1,5 +1,5 @@
 {
-  "name": "dadi-boot",
+  "name": "@dadi/boot",
   "version": "0.0.0-development",
   "description": "A module to help DADI apps boot uniformly.",
   "main": "index.js",
