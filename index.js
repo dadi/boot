@@ -9,6 +9,7 @@ const docs = 'https://docs.dadi.tech'
 
 const cliTable = require('cli-table2')
 const colors = require('colors')
+const compare = require('semver-compare')
 const concierge = require('ora')()
 const dadiStatus = require('@dadi/status')
 
@@ -71,7 +72,8 @@ module.exports.started = info => {
     }, (err, data) => {
       if (data.service && data.service.versions) {
         const versions = data.service.versions
-        if (versions.current !== versions.latest) {
+
+        if (compare(versions.latest, versions.current) === 1) {
           concierge.info(`A newer version of ${pkg.name} is available: ${versions.latest}`)
         }
       }
