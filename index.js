@@ -61,22 +61,24 @@ module.exports.started = info => {
   Object.keys(info.footer).map(i => footer.push([i, info.footer[i]]))
 
   // Check if this is latest version
-  dadiStatus({
-    package: pkg.name,
-    version: pkg.version,
-    healthCheck: {
-      routes: []
-    }
-  }, (err, data) => {
-    if (data.service && data.service.versions) {
-      const versions = data.service.versions
-      if (versions.current !== versions.latest) {
-       concierge.info(`A newer version of ${pkg.description} is available: ${versions.latest}`)
+  if (pkg) {
+    dadiStatus({
+      package: pkg.name,
+      version: pkg.version,
+      healthCheck: {
+        routes: []
       }
-    }
-  })
+    }, (err, data) => {
+      if (data.service && data.service.versions) {
+        const versions = data.service.versions
+        if (versions.current !== versions.latest) {
+          concierge.info(`A newer version of ${pkg.description} is available: ${versions.latest}`)
+        }
+      }
+    })
+  }
 
-  concierge.succeed(`Started ${pkg.description}\n${`@`.green} ${info.server.underline}
+  concierge.succeed(`Started ${pkg ? pkg.description : ''}\n${`@`.green} ${info.server.underline}
   
   ${header.toString().split('\n').join('\n  ')}
   ${body.toString().split('\n').join('\n  ')}
@@ -99,7 +101,7 @@ module.exports.started = info => {
 
 module.exports.error = err => {
   concierge.fail(`${err}`.red)
-  process.exit(0)
+  // process.exit(0)
 }
 
 /**
@@ -108,6 +110,5 @@ module.exports.error = err => {
  */
 
 module.exports.stopped = message => {
-  concierge.fail(`Stopping & exiting ${pkg.description}.`.red)
-  process.exit(0)
+  concierge.fail(`Stopping & exiting ${pkg ? pkg.description : ''}${message ? ': ' + message : ''}.`.red)
 }

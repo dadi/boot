@@ -62,7 +62,7 @@ An object of supplementary information which the user might need to know, e.g., 
 
 ### Errors
 
-A string which is outputted as red in the terminal. Always ends with a process kill `process.exit(0)`.
+Accepts a string which is output as red in the terminal.
 
 ```js
 dadiBoot.error(err)
@@ -70,8 +70,8 @@ dadiBoot.error(err)
 
 ### Stopped
 
-To be triggered anytime the app is shutdown. A string which is outputted as red in the terminal. Always ends with a process kill `process.exit(0)`.
+To be triggered anytime the app is shutdown. Accepts a string which is output as red in the terminal.
 
 ```js
-dadiBoot.stopped()
+dadiBoot.stopped('Extra message')
 ```
