@@ -41,12 +41,12 @@ const footer = new cliTable({
  */
 
 // Make these globally available
-let pkg 
-let statusPayload 
+let pkg
+let statusPayload
 
 module.exports.start = product => {
-  pkg = product  
-  concierge.start(`Starting ${pkg.description}…`)
+  pkg = product
+  concierge.start(`Starting ${pkg.name}...`)
   concierge.color = 'white'
 }
 
@@ -72,14 +72,14 @@ module.exports.started = info => {
       if (data.service && data.service.versions) {
         const versions = data.service.versions
         if (versions.current !== versions.latest) {
-          concierge.info(`A newer version of ${pkg.description} is available: ${versions.latest}`)
+          concierge.info(`A newer version of ${pkg.name} is available: ${versions.latest}`)
         }
       }
     })
   }
 
-  concierge.succeed(`Started ${pkg ? pkg.description : ''}\n${`@`.green} ${info.server.underline}
-  
+  concierge.succeed(`Started ${pkg ? pkg.name : ''}\n${`@`.green} ${info.server.underline}
+
   ${header.toString().split('\n').join('\n  ')}
   ${body.toString().split('\n').join('\n  ')}
   ${footer.toString().split('\n').join('\n  ')}
