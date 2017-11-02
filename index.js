@@ -43,11 +43,12 @@ const footer = new cliTable({
 
 // Make these globally available
 let pkg
+let pkgName
 let statusPayload
-const pkgName = pkg ? (pkg.product ? pkg.product : pkg.name) : ''
 
 module.exports.start = product => {
   pkg = product
+  pkgName = pkg ? (pkg.product ? pkg.product : pkg.name) : ''
   concierge.start(`Starting ${pkg.name}...`)
   concierge.color = 'white'
 }
