@@ -44,6 +44,7 @@ const footer = new cliTable({
 // Make these globally available
 let pkg
 let statusPayload
+const pkgName = pkg ? (pkg.product ? pkg.product : pkg.name) : ''
 
 module.exports.start = product => {
   pkg = product
@@ -80,8 +81,6 @@ module.exports.started = info => {
     })
   }
 
-  const pkgName = pkg ? (pkg.product ? pkg.product : pkg.name) : ''
-
   concierge.succeed(`Started ${pkgName}\n${`@`.green} ${info.server.underline}
 
   ${header.toString().split('\n').join('\n  ')}
@@ -114,5 +113,5 @@ module.exports.error = err => {
  */
 
 module.exports.stopped = message => {
-  concierge.fail(`Stopping & exiting ${pkg ? pkg.description : ''}${message ? ': ' + message : ''}.`.red)
+  concierge.fail(`Stopping & exiting ${pkgName}. ${message ? `: ${message}. ` : ''}`.red)
 }
