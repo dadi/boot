@@ -74,13 +74,15 @@ module.exports.started = info => {
         const versions = data.service.versions
 
         if (compare(versions.latest, versions.current) === 1) {
-          concierge.info(`A newer version of ${pkg.name} is available: ${versions.latest}`)
+          concierge.info(`A newer version of ${pkg.product ? pkg.product : pkg.name} is available: ${versions.latest}`)
         }
       }
     })
   }
 
-  concierge.succeed(`Started ${pkg ? pkg.name : ''}\n${`@`.green} ${info.server.underline}
+  const pkgName = pkg ? (pkg.product ? pkg.product : pkg.name) : ''
+
+  concierge.succeed(`Started ${pkgName}\n${`@`.green} ${info.server.underline}
 
   ${header.toString().split('\n').join('\n  ')}
   ${body.toString().split('\n').join('\n  ')}
