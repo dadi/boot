@@ -5,7 +5,7 @@ const logo = `
                ▓▓▓▓
           ▓▓▓▓▓▓▓`
 
-const docs = 'https://docs.dadi.tech'
+const docs = 'https://docs.dadi.cloud'
 
 const cliTable = require('cli-table2')
 const colors = require('colors')
