@@ -94,7 +94,7 @@ module.exports.started = info => {
   ${logo}
 
 
-  ${`© ${new Date().getFullYear()} DADI+ Limited (https://dadi.tech)\n  All rights reserved.`.grey}
+  ${`© ${new Date().getFullYear()} DADI+ Limited (https://dadi.cloud)\n  All rights reserved.`.grey}
   `)
 }
 
