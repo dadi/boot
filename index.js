@@ -7,7 +7,7 @@ const logo = `
 
 const docs = 'https://docs.dadi.cloud'
 
-const cliTable = require('cli-table2')
+const cliTable = require('cli-table3')
 const colors = require('colors')
 const compare = require('semver-compare')
 const concierge = require('ora')()
