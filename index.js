@@ -5,7 +5,7 @@ const logo = `
                ▓▓▓▓
           ▓▓▓▓▓▓▓`
 
-const docs = 'https://docs.dadi.tech'
+const docs = 'https://docs.dadi.cloud'
 
 const cliTable = require('cli-table2')
 const colors = require('colors')
@@ -94,7 +94,7 @@ module.exports.started = info => {
   ${logo}
 
 
-  ${`© ${new Date().getFullYear()} DADI+ Limited (https://dadi.tech)\n  All rights reserved.`.grey}
+  ${`© ${new Date().getFullYear()} DADI+ Limited (https://dadi.cloud)\n  All rights reserved.`.grey}
   `)
 }
 
